@@ -1,4 +1,5 @@
-if [ ! -f .stamp ] ; then
+docker run --rm=true localhost/afcowie/debian:stretch cat /.stamp > .base
+if [ .base -nt .stamp ] ; then
 	date -u +%FT%TZ > .stamp
 fi
 
