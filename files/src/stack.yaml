@@ -1,8 +1,1 @@
 resolver: lts-12.17
-extra-deps:
- - bytestring
- - containers
- - mtl
- - text
- - unordered-containers
-       

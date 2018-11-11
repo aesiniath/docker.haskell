@@ -27,17 +27,20 @@ RUN wget -q -O - https://get.haskellstack.org/stable/linux-x86_64.tar.gz | \
 # Otherwise you'll be redownloading the compiler every single time you build
 # that layer.
 #
-# TODO this is *insanely* heavy weight. We need to inject this from a local
-# cache somehow.
+# TODO this is *insanely* heavy weight. Current compiler download is 144 MB. We
+# need to inject this from a local cache somehow.
 # 
 
 RUN stack setup
+RUN stack update
 
 #
-# Now customize the snapshot. It's specified in files/src/stack.yaml
+# Now customize the snapshot and start downloading packages. The resolver is
+# specified in files/src/stack.yaml, and the list of dependencies to be built
+# (and thus cached in the Docker image) are in package.yaml.
 #
 
-ADD files/src/. /src
 WORKDIR /src
+ADD files/src/. /src
 
-RUN stack install --only-dependencies
+RUN stack build

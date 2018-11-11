@@ -1,0 +1,23 @@
+name: baseline
+version:  0
+synopsis: Baseline for buiding Haskell programs
+license: BSD3
+license-file: LICENCE
+author: Andrew Cowie <andrew@operationaldynamics.com>
+maintainer: Andrew Cowie <andrew@operationaldynamics.com>
+copyright: © 2018 Operational Dynamics Consulting Pty Ltd, and Others
+tested-with: GHC == 8.4
+
+dependencies:
+ - base
+ - bytestring
+ - containers
+ - directory
+ - filepath
+ - text
+ - unix
+ - unordered-containers
+
+library:
+  other-modules:
+    - Nothing
