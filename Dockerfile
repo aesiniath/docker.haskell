@@ -42,5 +42,6 @@ RUN stack update
 
 WORKDIR /src
 ADD files/src/. /src
+ADD files/root/.ghc /root/.ghc
 
 RUN stack build
