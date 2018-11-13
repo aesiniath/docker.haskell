@@ -8,6 +8,5 @@ docker build \
 	--tag=localhost/afcowie/haskell:lts-12.18 \
 	--network=proxy \
 	--force-rm=true \
-	--tmpfs=/tmp \
-	--tmpfs=/.stack-work \
 	.
+

@@ -31,9 +31,14 @@ RUN wget -q -O - https://get.haskellstack.org/stable/linux-x86_64.tar.gz | \
 # need to inject this from a local cache somehow.
 # 
 
-ADD files/root/.ghc /root/.ghc
-RUN stack setup
-RUN stack update
+ADD files/root/. /root
+ADD files/usr/local/bin/cleanup /usr/local/bin
+
+RUN stack setup --resolver=lts-12.18 \
+ && cleanup
+
+RUN stack update --resolver=lts-12.18 \
+ && cleanup
 
 #
 # Now customize the snapshot and start downloading packages. The resolver is
@@ -43,4 +48,5 @@ RUN stack update
 
 WORKDIR /src
 ADD files/src/. /src
-RUN stack build
+RUN stack build --resolver=lts-12.18 \
+ && cleanup
