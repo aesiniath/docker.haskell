@@ -31,6 +31,7 @@ RUN wget -q -O - https://get.haskellstack.org/stable/linux-x86_64.tar.gz | \
 # need to inject this from a local cache somehow.
 # 
 
+ADD files/root/.ghc /root/.ghc
 RUN stack setup
 RUN stack update
 
@@ -42,6 +43,4 @@ RUN stack update
 
 WORKDIR /src
 ADD files/src/. /src
-ADD files/root/.ghc /root/.ghc
-
 RUN stack build

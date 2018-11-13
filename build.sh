@@ -7,4 +7,5 @@ fi
 docker build \
 	--tag=localhost/afcowie/haskell:lts-12.17 \
 	--network=proxy \
+	--force-rm=true \
 	.
