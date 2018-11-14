@@ -1,24 +1,43 @@
 #!/bin/sh
 
-set -x
+#
+# Clean up as much as possible of stack's downloads and caches. Print out
+# an informative line for each target being cleaned. This is intended for
+# use in Dockerfiles when building Haskell code. Usage:
+#
+# 	RUN stack install acme-missiles && cleanup
+#
+# It's safe to do this after every command, even though some targets are
+# only applicable after different stages (setup, update, build)
+#
+
+remove () {
+	ROOT="$1"
+	NAME="$2"
+
+	# The '+' character at the end of the -exec action accumulates the
+	# files into a single invocation of the command in the same manner
+	# as xargs does. Huh.
+	find "$ROOT" -depth -name "$NAME" -printf "R %p\n" -exec rm -r {} +
+}
 
 # Compiler download
-rm -r /root/.stack/programs/*/*.tar.xz
+remove /root/.stack/programs '*.tar.xz'
 
 # Package downloads
-rm -r /root/.stack/indices/Hackage/packages/*
+remove /root/.stack/indices/Hackage/packages
 
 # Remove documentation where present
-find /root/.stack -type d -name 'doc' -exec rm -r {} \;
-find /root/.stack -type d -name 'man' -exec rm -r {} \;
+remove /root/.stack 'doc'
+remove /root/.stack 'man'
 
 # Remove caches
-rm -r /root/.stack/loaded-snapshot-cache
-rm -r /root/.stack/setup-exe-cache
-rm -r /root/.stack/build-plan-cache
-rm -r /root/.stack/indices/Hackage/00-index.tar
+remove /root/.stack 'loaded-snapshot-cache'
+remove /root/.stack 'setup-exe-cache'
+remove /root/.stack 'build-plan-cache'
+remove /root/.stack/indices/Hackage '00-index.tar'
 
 # Nuke from orbit before it escapes and colonizes other planets
-rm -r ./.stack-work
+remove . '.stack-work'
 
 exit 0
