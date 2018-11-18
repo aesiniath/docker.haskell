@@ -37,9 +37,6 @@ remove /root/.stack 'setup-exe-cache'
 remove /root/.stack 'build-plan-cache'
 remove /root/.stack/indices/Hackage '00-index.tar'
 
-# Get rid of dynamic library fragments
-remove /root/.stack/indices/Hackage '*.dyn_hi'
-
 # Nuke from orbit before it escapes and colonizes other planets
 remove . '.stack-work'
 
