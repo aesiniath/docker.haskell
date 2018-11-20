@@ -1,4 +1,4 @@
-FROM localhost/afcowie/debian:stretch
+FROM oprdyn/debian:stretch
 COPY .stamp /
 
 #
