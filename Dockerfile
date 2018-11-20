@@ -46,7 +46,7 @@ RUN stack update --resolver=lts-12.18 \
 # (and thus cached in the Docker image) are in package.yaml.
 #
 
-WORKDIR /src
-ADD files/src/. /src
+WORKDIR /src/baseline
+ADD files/src/ /src/
 RUN stack build --resolver=lts-12.18 \
  && cleanup
