@@ -38,10 +38,11 @@ ADD files/usr/local/bin/. /usr/local/bin
 RUN wget -q -O - https://github.com/commercialhaskell/stackage-content/raw/master/stack/stack-setup-2.yaml \
 	| patch-setup > /root/setup-info.yaml
 
-RUN stack setup --resolver=lts-12.18 \
+ARG RESOLVER
+RUN stack setup --resolver=$RESOLVER --setup-info-yaml=/root/setup-info.yaml \
  && cleanup
 
-RUN stack update --resolver=lts-12.18 \
+RUN stack update --resolver=$RESOLVER \
  && cleanup
 
 #
@@ -52,5 +53,5 @@ RUN stack update --resolver=lts-12.18 \
 
 WORKDIR /src/baseline
 ADD files/src/ /src/
-RUN stack build --resolver=lts-12.18 \
+RUN stack build --resolver=$RESOLVER \
  && cleanup

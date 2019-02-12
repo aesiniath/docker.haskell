@@ -1,12 +1,10 @@
-docker run --rm=true oprdyn/debian:stretch cat /.stamp > .base
-touch -d`cat .base` .base
-if [ .base -nt .stamp ] ; then
-	date -u +%FT%TZ > .stamp
-fi
+#! /usr/bin/env sh
+
+RESOLVER="$1"
 
 docker build \
-	--tag=oprdyn/haskell:lts-12.18 \
-	--network=proxy \
+	--build-arg RESOLVER="$RESOLVER" \
+	--tag=oprdyn/haskell:"$RESOLVER" \
 	--force-rm=true \
 	.
 
