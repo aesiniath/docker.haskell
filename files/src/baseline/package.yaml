@@ -8,31 +8,7 @@ maintainer: Andrew Cowie <andrew@operationaldynamics.com>
 copyright: © 2018 Operational Dynamics Consulting Pty Ltd, and Others
 tested-with: GHC == 8.4
 
-dependencies:
- - aeson
- - async
- - attoparsec
- - base
- - bytestring
- - chronologique
- - containers
- - directory
- - filepath
- - hspec
- - network
- - network-uri
- - prettyprinter
- - prettyprinter-ansi-terminal
- - QuickCheck
- - safe-exceptions
- - scientific
- - text
- - text-short
- - tls
- - unix
- - unordered-containers
- - vector
- - vector-algorithms
+dependencies: []
 
 library:
   other-modules:

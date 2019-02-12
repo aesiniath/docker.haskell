@@ -1,4 +1,4 @@
-FROM oprdyn/debian:stretch
+FROM docker.io/oprdyn/debian:stretch
 
 #
 # Install wget (and certificates so https works) and the list of dependencies
@@ -54,4 +54,29 @@ RUN stack update --resolver=$RESOLVER \
 WORKDIR /src/baseline
 ADD files/src/ /src/
 RUN stack build --resolver=$RESOLVER \
+        aeson \
+        async \
+        attoparsec \
+        base \
+        bytestring \
+        chronologique \
+        containers \
+        directory \
+        filepath \
+        hspec \
+        network \
+        network-uri \
+        prettyprinter \
+        prettyprinter-ansi-terminal \
+        QuickCheck \
+        safe-exceptions \
+        scientific \
+        text \
+        text-short \
+        tls \
+        unix \
+        unordered-containers \
+        vector \
+        vector-algorithms \
+	. \
  && cleanup
