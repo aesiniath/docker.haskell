@@ -47,8 +47,9 @@ RUN stack update --resolver=$RESOLVER \
 
 #
 # Now customize the snapshot and start downloading packages. The resolver is
-# specified in files/src/stack.yaml, and the list of dependencies to be built
-# (and thus cached in the Docker image) are in package.yaml.
+# specified here as with the other layers, but the the list of dependencies to
+# be built (and thus cached in the Docker image) are in listed in
+# files/src/baselines/package.yaml.
 #
 
 WORKDIR /src/baseline
