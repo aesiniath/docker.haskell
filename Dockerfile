@@ -1,5 +1,4 @@
 FROM oprdyn/debian:stretch
-COPY .stamp /
 
 #
 # Install wget (and certificates so https works) and the list of dependencies
@@ -7,32 +6,37 @@ COPY .stamp /
 # to enable networking to get **http-client** to work. Da fu?
 #
 
-RUN apt-get install \
+RUN apt-get update \
+ && apt-get install --no-install-recommends --assume-yes \
 	wget ca-certificates \
 	g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg \
-	netbase
+	netbase \
+ && apt-get clean
 
 #
-# Download the latest stack binary and put it in /usr/local/bin
+# Download the latest stack binary and put it in /usr/local/bin. Originally
+# this went through <https://get.haskellstack.org/stable/linux-x86_64.tar.gz>,
+# but knowing exactly what binary is being used to bootstrap is not
+# the worst thing.
 #
 
-RUN wget -q -O - https://get.haskellstack.org/stable/linux-x86_64.tar.gz | \
-	tar -x -z -C /usr/local/bin --strip-components=1 --wildcards '*stack'
+RUN wget -q -O - https://github.com/commercialhaskell/stack/releases/download/v1.9.3/stack-1.9.3-linux-x86_64.tar.gz \
+	| tar -x -z -C /usr/local/bin --strip-components=1 --wildcards '*stack'
 
 #
 # Download latest snapshot and install its compiler. By *not* specifying the
 # snapshot the default latest will be plonked in /root/.stack/global-project
 # and that will send in a compiler. If later RUN command specifies a snapshot
-# that includes a newer compiler, then just nuke the .stamp and redo this.
+# that includes a newer compiler, then just nuke the docker image and redo.
 # Otherwise you'll be redownloading the compiler every single time you build
 # that layer.
 #
-# TODO this is *insanely* heavy weight. Current compiler download is 144 MB. We
-# need to inject this from a local cache somehow.
-# 
 
 ADD files/root/. /root
-ADD files/usr/local/bin/cleanup /usr/local/bin
+ADD files/usr/local/bin/. /usr/local/bin
+
+RUN wget -q -O - https://github.com/commercialhaskell/stackage-content/raw/master/stack/stack-setup-2.yaml \
+	| patch-setup > /root/setup-info.yaml
 
 RUN stack setup --resolver=lts-12.18 \
  && cleanup

@@ -1,0 +1,31 @@
+#!/usr/bin/perl
+
+#
+# Patch the control file used by stack to know where to download the GHC
+# compiler from during the `stack setup` step if necessary. We transform URLs
+# of the form
+#
+#   https://github.com/commercialhaskell/ghc/releases/download/ghc-8.6.3-release/ghc-8.6.3-x86_64-deb8-linux.tar.xz
+#
+# into
+#
+#   https://FIXME/org.haskell.downloads/~ghc/8.6.3/ghc-8.6.3-x86_64-deb8-linux.tar.xz
+#
+# Note that we are pulling these from (our mirror of) the upstream GHC
+# developer's release page, not from the mirror maintained by fpcomplete on
+# GitHub. This is partially for confidence in providence, and partially to
+# contribute a sanity check as the stack-setup-2.yaml file contains checksums.
+#
+# The file being manipulated is originally at
+#
+#   https://github.com/commercialhaskell/stackage-content/blob/master/stack/stack-setup-2.yaml
+#
+
+while (<>) {
+    if (/apple-darwin/) {
+#       s{github.com/commercialhaskell/ghc/releases/download/ghc-(.*)-release/(.*)$}{/FIXME/github.commercialhaskell.ghc/releases/download/ghc-$1-release/$2};
+    } else {
+        s{github.com/commercialhaskell/ghc/releases/download/ghc-(.*)-release/(.*)$}{downloads.haskell.org/~ghc/$1/$2};
+    }
+    print "$_";
+}
