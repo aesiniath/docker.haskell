@@ -10,7 +10,7 @@ RUN apt-get update \
  && apt-get install --no-install-recommends --assume-yes \
 	wget ca-certificates \
 	g++ gcc libc6-dev libffi-dev libgmp-dev make xz-utils zlib1g-dev git gnupg \
-	netbase liblzma-dev \
+	netbase liblzma-dev libssl-dev \
  && apt-get clean
 
 #
