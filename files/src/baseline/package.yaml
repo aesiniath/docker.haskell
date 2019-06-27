@@ -21,6 +21,7 @@ dependencies:
  - filepath
  - fingertree
  - hspec
+ - HsOpenSSL
  - HTTP
  - http-client
  - http-client-tls
