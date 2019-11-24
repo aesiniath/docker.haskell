@@ -1,4 +1,4 @@
-FROM oprdyn/debian:stretch
+FROM oprdyn/debian:buster
 
 #
 # Install wget (and certificates so https works) and the list of dependencies
