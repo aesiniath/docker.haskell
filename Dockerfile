@@ -20,7 +20,7 @@ RUN apt-get update \
 # the worst thing.
 #
 
-RUN wget -q -O - https://github.com/commercialhaskell/stack/releases/download/v1.9.3/stack-1.9.3-linux-x86_64.tar.gz \
+RUN wget -q -O - https://github.com/commercialhaskell/stack/releases/download/v2.1.3/stack-2.1.3-linux-x86_64.tar.gz \
 	| tar -x -z -C /usr/local/bin --strip-components=1 --wildcards '*stack'
 
 #
