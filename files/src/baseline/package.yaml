@@ -6,7 +6,7 @@ license-file: LICENCE
 author: Andrew Cowie <andrew@operationaldynamics.com>
 maintainer: Andrew Cowie <andrew@operationaldynamics.com>
 copyright: © 2018 Operational Dynamics Consulting Pty Ltd, and Others
-tested-with: GHC == 8.4
+tested-with: GHC == 8.6
 
 dependencies:
  - aeson
@@ -14,15 +14,19 @@ dependencies:
  - attoparsec
  - base
  - bytestring
+ - Cabal
  - chronologique
  - containers
  - directory
  - filepath
+ - fingertree
  - hspec
+ - HsOpenSSL
  - HTTP
  - http-client
  - http-client-tls
  - http-streams
+ - lens
  - network
  - network-uri
  - prettyprinter
@@ -30,6 +34,7 @@ dependencies:
  - QuickCheck
  - safe-exceptions
  - scientific
+ - terminal-size
  - text
  - text-short
  - tls
