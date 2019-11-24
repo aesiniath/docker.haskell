@@ -3,9 +3,7 @@
 # http://docs.haskellstack.org/en/stable/yaml_configuration/
 
 package-indices:
- - name: Hackage
-   download-prefix: https://hackage.haskell.org/package/
-   http: https://hackage.haskell.org/
+ - download-prefix: https://hackage.haskell.org/
    hackage-security:
      keyids:
         [ "0a5c7ea47cd1b15f01f5f51a33adda7e655bc0f0b0615baa8e271f4c3351e21d"
@@ -19,8 +17,3 @@ package-indices:
         , "fe331502606802feac15e514d9b9ea83fee8b6ffef71335479a2e68d84adc6b0"
         ]
      key-threshold: 3
-
-urls:
-  latest-snapshot: https://github.com/commercialhaskell/stackage-content/raw/master/snapshots.json
-  lts-build-plans: https://github.com/commercialhaskell/lts-haskell/raw/master
-  nightly-build-plans: https://github.com/commericialhaskell/stackage-nightly/raw/master
