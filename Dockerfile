@@ -1,4 +1,4 @@
-FROM oprdyn/debian:buster
+FROM aesiniath/debian:buster
 
 #
 # Install wget (and certificates so https works) and the list of dependencies

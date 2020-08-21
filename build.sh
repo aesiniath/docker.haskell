@@ -2,10 +2,9 @@
 
 RESOLVER="$1"
 
-docker build \
+podman build \
 	--build-arg RESOLVER="$RESOLVER" \
-	--tag=oprdyn/haskell:"$RESOLVER" \
-	--network=proxy \
+	--tag=aesiniath/haskell:"$RESOLVER" \
 	--force-rm=true \
 	.
 
